@@ -1,4 +1,4 @@
-#Encapsulation, Abstraction, Polymorphism using inheritance, Duck Typing
+#Encapsulation, Abstraction, Polymorphism by inheritance, Duck-typing
 
 #For Encapsulation
 class Numbers
@@ -44,28 +44,46 @@ class Numbers
 end
 
 
+#Polymorphism by inheritance
+class Shape
+  def area
+    #will be overwritten from subclass
+  end
+end
 
+class Square < Shape #inherits from shape
+  attr_accessor :side_length
 
+  def initialize(side_length)
+    @side_length = side_length
+  end
 
+  def area #overrides the area method
+    side_length * side_length
+  end
+end
 
+class Circle < Shape #inherits from shape
+  attr_accessor :radius
 
+  def initialize(radius) 
+    @radius = radius
+  end
 
+  def area #overrides the area method
+    Math::PI * radius * radius
+  end
+end
 
+def calculate_area(shape) #calls the area method based on the type of the object
+  shape.area
+end
 
+square = Square.new(5) 
+circle = Circle.new(3)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+puts "Area of the square: #{calculate_area(square)}"  # Area of square
+puts "Area of the circle: #{calculate_area(circle)}"   # Area of circle
 
 
 #duck typing
