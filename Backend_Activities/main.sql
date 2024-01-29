@@ -1,4 +1,3 @@
-
 CREATE TABLE students (
 	id 			integer 			   	PRIMARY KEY,
 	first_name 	character varying(50)   NOT NULL,
@@ -28,7 +27,13 @@ SET
 	
 WHERE id = 1;
 
-DELETE FROM students WHERE id =1 ;
+DELETE FROM students
+	WHERE id = (SELECT MAX(id) FROM students);
 
+SELECT COUNT(*) From students;
 
-SELECT * FROM students;
+SELECT * FROM students WHERE location = 'Manila';
+
+SELECT AVG(age) FROM students;
+
+SELECT * FROM students ORDER BY age DESC;
