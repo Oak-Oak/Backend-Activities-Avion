@@ -37,3 +37,51 @@ SELECT * FROM students WHERE location = 'Manila';
 SELECT AVG(age) FROM students;
 
 SELECT * FROM students ORDER BY age DESC;
+
+CREATE TABLE research_papers (
+	id 			integer 			   	PRIMARY KEY,
+	student_id 	integer   				NOT NULL,
+    grade       character varying(1)    DEFAULT NULL,
+    FOREIGN KEY (student_id) REFERENCES students(id)
+);
+
+INSERT INTO research_papers
+	(id, student_id, grade)
+	
+VALUES
+	(10,1,'A'),
+	(20,1,'B'),
+	(30,1,'C'),
+	(40,2,'D'),
+	(50,2,'D'),
+	(60,3,NULL),
+	(70,4,NULL),
+	(80,5,'F'),
+	(90,3,'E'),
+	(100,3,'B');
+	
+	
+SELECT
+	students.first_name,
+	students.last_name,
+	COUNT(research_papers.id) AS number_of_research_papers
+FROM 
+	students
+JOIN
+	research_papers ON students.id = research_papers.student_id
+GROUP BY
+	students.id, students.first_name, students.last_name
+HAVING
+	COUNT(research_papers.id) > 1;
+	
+SELECT
+	students.first_name,
+	students.last_name,
+	research_papers.id AS research_papers_id,
+	research_papers.grade
+FROM 
+	students
+JOIN
+	research_papers ON students.id = research_papers.student_id
+WHERE
+	research_papers.grade IS NULL;
