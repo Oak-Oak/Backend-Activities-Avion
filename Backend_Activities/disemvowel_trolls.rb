@@ -10,3 +10,5 @@ def remove_vowels(string)
 end
 
 puts remove_vowels("Hello World")
+puts remove_vowels("This website is for losers LOL!")
+puts remove_vowels("Disemvowel Trolls")
